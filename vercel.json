@@ -1,7 +1,15 @@
 {
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/app.py" }
+  "version": 2,
+  "builds": [
+    {
+      "src": "app.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/app.py"
+    }
   ]
 }
-```[_{{{CITATION{{{_3{How to Fix Vercel 404 error: Child URL Path Issues](https://dev.to/david_bilsonn/how-to-fix-vercel-404-error-child-url-path-issues-n0o)
-
