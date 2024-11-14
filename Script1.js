@@ -62,7 +62,7 @@ const sendMessage = async () => {
     chatInput.value = '';
 
     // Send user message to server and get response
-    const response = await fetch('http://192.168.0.105:8000', {
+    const response = await fetch('http://127.0.0.1:8000/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

@@ -594,11 +594,10 @@ class MyServer(BaseHTTPRequestHandler):
 
 #Creates the port were the the code will run on
 def run(server_class=HTTPServer, handler_class=MyServer, port=8000):
-    server_address = ('192.168.0.105', port)  # Replace with your specific IP
+    server_address = ('', port)
     httpd = server_class(server_address, handler_class)
     print(f'Starting server on port {port}...')
     httpd.serve_forever()
-
 
 #Runs the python code on the port given
 if __name__ == '__main__':
