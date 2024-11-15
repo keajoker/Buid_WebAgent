@@ -62,7 +62,7 @@ const sendMessage = async () => {
     try {
         // Use the port-forwarded URL
         const response = await fetch('https://f7w3h7d5-8000.inc1.devtunnels.ms/', {
-            method: 'POST',
+            method: 'do_POST',
             headers: {
                 'Content-Type': 'application/json'
             },

@@ -566,13 +566,14 @@ def answer_question(question, all_paragraphs):
 #You can add possible questions with answers if needed
 
 #Allows the connection between the backend and frontend through local host
+# Server class to handle requests
 class MyServer(BaseHTTPRequestHandler):
     all_paragraphs = None
 
     def _set_response(self):
         self.send_response(200)
         self.send_header('Content-type', 'application/json')
-        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Access-Control-Allow-Origin', '*')  # Allow all origins for simplicity
         self.send_header('Access-Control-Allow-Methods', 'POST, OPTIONS')
         self.send_header('Access-Control-Allow-Headers', 'Content-Type')
         self.end_headers()
@@ -581,24 +582,28 @@ class MyServer(BaseHTTPRequestHandler):
         self._set_response()
 
     def do_POST(self):
-        content_length = int(self.headers['Content-Length'])
-        post_data = self.rfile.read(content_length)
-        data = json.loads(post_data)
-        question = data.get("question", "")
-        answer = answer_question(question, MyServer.all_paragraphs)
-        response = {"answer": answer}
-        self._set_response()
-        self.wfile.write(bytes(json.dumps(response), 'utf-8'))
+        try:
+            content_length = int(self.headers['Content-Length'])
+            post_data = self.rfile.read(content_length)
+            data = json.loads(post_data)
+            question = data.get("question", "")
+            print(f"Received question: {question}")  # Debugging
+            answer = answer_question(question, MyServer.all_paragraphs)
+            response = {"answer": answer}
+            print(f"Sending response: {response}")  # Debugging
+            self._set_response()
+            self.wfile.write(bytes(json.dumps(response), 'utf-8'))
+        except Exception as e:
+            print(f"Error handling POST request: {e}")
+            self.send_response(500)
+            self.end_headers()
+            self.wfile.write(bytes(json.dumps({"error": str(e)}), 'utf-8'))
 
-
-
-#Creates the port were the the code will run on
 def run(server_class=HTTPServer, handler_class=MyServer, port=8000):
-    server_address = ('127.0.0.1', port)
+    server_address = ('', port)
     httpd = server_class(server_address, handler_class)
     print(f'Starting server on port {port}...')
     httpd.serve_forever()
 
-#Runs the python code on the port given
 if __name__ == '__main__':
     run()
