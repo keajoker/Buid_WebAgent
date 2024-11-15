@@ -8,9 +8,10 @@ const chatInput = document.getElementById('chatInput');
 const chatMessages = document.getElementById('chatMessages');
 const voiceButton = document.querySelector('.voice-button');
 const voiceButtonImage = voiceButton.querySelector('img');
-const readAloudButton = document.getElementById('readAloudButton'); // New button for reading aloud
+const readAloudButton = document.getElementById('readAloudButton');
 let isDarkMode = true;
-let isReading = false; // Flag to track reading state
+let isReading = false;
+let isSending = false;
 
 // Toggle sidebar visibility
 menuIcon.addEventListener('click', () => {
@@ -48,8 +49,14 @@ function linkify(text) {
 
 // Send message to the bot
 const sendMessage = async () => {
+    if (isSending) return;
+    isSending = true;
+
     let userMessage = chatInput.value.trim();
-    if (!userMessage) return;
+    if (!userMessage) {
+        isSending = false;
+        return;
+    }
 
     userMessage = userMessage.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "");
 
@@ -59,45 +66,42 @@ const sendMessage = async () => {
     chatMessages.appendChild(userMessageElement);
     chatInput.value = '';
 
+    const botMessageElement = document.createElement('div');
+    botMessageElement.className = 'bot-message';
+    botMessageElement.textContent = 'Loading...';
+    chatMessages.appendChild(botMessageElement);
+
+    console.log('Sending message to backend:', userMessage);
+
     try {
         const response = await fetch('https://f7w3h7d5-8000.inc1.devtunnels.ms/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ question: userMessage })
+            body: JSON.stringify({ question: userMessage }),
         });
 
         if (response.ok) {
             const result = await response.json();
-            console.log('Response from backend:', result); // Debugging
-            const botMessageElement = document.createElement('div');
-            botMessageElement.className = 'bot-message';
-            botMessageElement.innerHTML = linkify(result.answer);
-            chatMessages.appendChild(botMessageElement);
+            console.log("Response from backend:", result);
+            botMessageElement.innerHTML = linkify(result.answer || "I'm not sure how to respond to that.");
         } else {
-            console.error('Server response was not ok.');
+            console.error("Server responded with an error:", response.status);
+            botMessageElement.textContent = "Sorry, there was an error processing your request.";
         }
     } catch (error) {
-        console.error('Fetch error:', error);
+        console.error("Fetch error:", error);
+        botMessageElement.textContent = "Network error. Please try again.";
     }
 
+    isSending = false;
     chatMessages.scrollTop = chatMessages.scrollHeight;
 };
 
 document.querySelector('.send-button').addEventListener('click', sendMessage);
 chatInput.addEventListener('keypress', (event) => {
     if (event.key === 'Enter') sendMessage();
-});
-
-// Open menu links in a new tab
-document.querySelectorAll('.menu li').forEach(item => {
-    item.addEventListener('click', () => {
-        const link = item.getAttribute('data-link');
-        if (link) {
-            window.open(link, '_blank'); // Open link in a new tab
-        }
-    });
 });
 
 // Load chat history if it exists
@@ -115,29 +119,24 @@ if ('webkitSpeechRecognition' in window) {
     recognition.continuous = false;
     recognition.interimResults = false;
 
-    // Start listening
     recognition.onstart = () => {
-        voiceButtonImage.src = 'listening.png'; // Change to a different image when listening
+        voiceButtonImage.src = 'listening.png';
     };
 
-    // Process result
     recognition.onresult = (event) => {
         const transcript = event.results[0][0].transcript;
-        chatInput.value = transcript.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, ""); // Remove special characters
+        chatInput.value = transcript.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "");
         sendMessage();
     };
 
-    // Handle errors
     recognition.onerror = (event) => {
         console.error('Speech recognition error', event);
     };
 
-    // End listening
     recognition.onend = () => {
-        voiceButtonImage.src = 'mic.png'; // Change back to original image
+        voiceButtonImage.src = 'mic.png';
     };
 
-    // Start voice recognition when the button is clicked
     voiceButton.addEventListener('click', () => {
         recognition.start();
     });
@@ -149,7 +148,7 @@ if ('webkitSpeechRecognition' in window) {
 // Read Aloud functionality
 readAloudButton.addEventListener('click', () => {
     if (isReading) {
-        speechSynthesis.cancel(); // Stop reading
+        speechSynthesis.cancel();
         readAloudButton.textContent = 'Read Aloud';
         isReading = false;
     } else {

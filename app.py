@@ -567,43 +567,48 @@ def answer_question(question, all_paragraphs):
 
 #Allows the connection between the backend and frontend through local host
 # Server class to handle requests
-class MyServer(BaseHTTPRequestHandler):
-    all_paragraphs = None
+class MyHandler(BaseHTTPRequestHandler):
 
-    def _set_response(self):
-        self.send_response(200)
-        self.send_header('Content-type', 'application/json')
-        self.send_header('Access-Control-Allow-Origin', '*')  # Allow all origins for simplicity
+    # Handle OPTIONS request for CORS
+    def do_OPTIONS(self):
+        self.send_response(204)
+        self.send_header('Access-Control-Allow-Origin', '*')
         self.send_header('Access-Control-Allow-Methods', 'POST, OPTIONS')
         self.send_header('Access-Control-Allow-Headers', 'Content-Type')
         self.end_headers()
 
-    def do_OPTIONS(self):
-        self._set_response()
-
+    # Handle POST request
     def do_POST(self):
+        content_length = int(self.headers['Content-Length'])  # Get the size of data
+        post_data = self.rfile.read(content_length)  # Read the incoming data
         try:
-            content_length = int(self.headers['Content-Length'])
-            post_data = self.rfile.read(content_length)
+            # Parse JSON data
             data = json.loads(post_data)
-            question = data.get("question", "")
-            print(f"Received question: {question}")  # Debugging
-            answer = answer_question(question, MyServer.all_paragraphs)
-            response = {"answer": answer}
-            print(f"Sending response: {response}")  # Debugging
-            self._set_response()
-            self.wfile.write(bytes(json.dumps(response), 'utf-8'))
-        except Exception as e:
-            print(f"Error handling POST request: {e}")
-            self.send_response(500)
-            self.end_headers()
-            self.wfile.write(bytes(json.dumps({"error": str(e)}), 'utf-8'))
+            question = data.get('question', '')
 
-def run(server_class=HTTPServer, handler_class=MyServer, port=8000):
-    server_address = ('', port)
-    httpd = server_class(server_address, handler_class)
-    print(f'Starting server on port {port}...')
-    httpd.serve_forever()
+            # Here, you can process the question and generate a response
+            response = {
+                'answer': f"You said: {question}"
+            }
+
+            # Send the response back to the client
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/json')
+            self.send_header('Access-Control-Allow-Origin', '*')
+            self.end_headers()
+            self.wfile.write(json.dumps(response).encode('utf-8'))
+
+        except Exception as e:
+            # Handle any parsing errors
+            self.send_response(500)
+            self.send_header('Content-Type', 'text/plain')
+            self.send_header('Access-Control-Allow-Origin', '*')
+            self.end_headers()
+            self.wfile.write(f"Server error: {str(e)}".encode('utf-8'))
 
 if __name__ == '__main__':
+    server_address = ('', 8000)
+    httpd = HTTPServer(server_address, MyHandler)
+    print("Starting server on port 8000...")
+    httpd.serve_forever()
     run()
