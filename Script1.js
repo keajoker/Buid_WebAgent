@@ -62,7 +62,7 @@ const sendMessage = async () => {
     chatInput.value = '';
 
     // Send user message to server and get response
-    const response = await fetch('https://f7w3h7d5-8000.inc1.devtunnels.ms','127.0.0.1:8000', {
+    const response = await fetch('https://f7w3h7d5-8000.inc1.devtunnels.ms','http://127.0.0.1:8000/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
