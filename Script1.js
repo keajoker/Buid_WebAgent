@@ -51,46 +51,40 @@ const sendMessage = async () => {
     let userMessage = chatInput.value.trim();
     if (!userMessage) return;
 
+    // Remove special characters from user message
     userMessage = userMessage.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "");
 
+    // Display user message in chat
     const userMessageElement = document.createElement('div');
     userMessageElement.className = 'user-message';
     userMessageElement.textContent = userMessage;
     chatMessages.appendChild(userMessageElement);
     chatInput.value = '';
 
-    try {
-        // Use the port-forwarded URL
-        const response = await fetch('https://f7w3h7d5-8000.inc1.devtunnels.ms/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ question: userMessage })
-        });
+    // Send user message to server and get response
+    const response = await fetch('https://f7w3h7d5-8000.inc1.devtunnels.ms', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ question: userMessage })
+    });
+    const result = await response.json();
 
-        if (response.ok) {
-            const result = await response.json();
-            console.log('Response from backend:', result); // Debugging
-            const botMessageElement = document.createElement('div');
-            botMessageElement.className = 'bot-message';
-            botMessageElement.innerHTML = linkify(result.answer);
-            chatMessages.appendChild(botMessageElement);
-        } else {
-            console.error('Server response was not ok.');
-        }
-    } catch (error) {
-        console.error('Fetch error:', error);
-    }
+    // Display bot response in chat
+    const botMessageElement = document.createElement('div');
+    botMessageElement.className = 'bot-message';
+    botMessageElement.innerHTML = linkify(result.answer); // Convert URLs to clickable links
+    chatMessages.appendChild(botMessageElement);
 
-    chatMessages.scrollTop = chatMessages.scrollHeight;
+    chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to bottom
 };
 
+// Attach event listeners for sending messages
 document.querySelector('.send-button').addEventListener('click', sendMessage);
 chatInput.addEventListener('keypress', (event) => {
     if (event.key === 'Enter') sendMessage();
 });
-
 
 // Open menu links in a new tab
 document.querySelectorAll('.menu li').forEach(item => {
