@@ -350,3 +350,14 @@ body.light-mode #readAloudButton {
 body.light-mode .close-sidebar-button {
     color: #333;
 }
+
+#closeSidebarButton {
+    position: fixed;
+    top: -10000px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 30px;
+    color: #fff;
+    cursor: pointer;
+    z-index: 1001; /* Ensure it’s on top */
