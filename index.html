@@ -7,28 +7,20 @@
     <link rel="stylesheet" href="desktop.css" media="(min-width: 769px)">
     <link rel="stylesheet" href="mobile.css" media="(max-width: 768px)">
     <script src="Script1.js" defer></script>
-    <script>
-        document.getElementById('menuIcon').addEventListener('click', () => {
-            const sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('active');
-        });
-    </script>
     <link rel="icon" href="Buid_logo.jpg" type="image/jpeg">
-
-
 </head>
 <body>
     <div class="container">
-        
         <button class="menu-button" id="menuButton">
             <div class="bar"></div>
             <div class="bar"></div>
             <div class="bar"></div>
         </button>
         <aside class="sidebar" id="sidebar">
-                        <div class="close-sidebar-button" id="closeSidebarButton">✖</div>
+            <div class="close-sidebar-button" id="closeSidebarButton">✖</div>
             <div class="menu-icon" id="menuIcon">☰</div>
             <ul class="menu">
+                <br>
                 <li data-link="https://www.buid.ac.ae/programmes/">Programs</li>
                 <li data-link="https://www.buid.ac.ae/library-services">Library Services</li>
                 <li data-link="https://www.buid.ac.ae/research-guides">Research Guides</li>
@@ -39,15 +31,13 @@
                 <li id="refreshPage">Refresh</li>
             </ul>
         </aside>
-
         <main class="main-content">
             <section class="top-section">
                 <div class="top-picture">
                     <a href="https://buid.ac.ae" target="_blank">
-                        <img src="Buid_logo.jpg" width="70" height="70" alt="Circular Image" class="circular-image">
+                        <img src="Buid_logo.jpg" alt="Circular Image" class="circular-image">
                     </a>
                 </div>
-                
                 <div class="top-text">BUiD's Web-Assistant</div>
             </section>
 
@@ -64,5 +54,3 @@
     </div>
 </body>
 </html>
-
-

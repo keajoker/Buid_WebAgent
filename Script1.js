@@ -2,6 +2,7 @@
 const menuButton = document.getElementById('menuButton');
 const menuIcon = document.getElementById('menuIcon');
 const sidebar = document.getElementById('sidebar');
+const closeSidebarButton = document.getElementById('closeSidebarButton'); // Added close button reference
 const toggleDarkModeButton = document.getElementById('toggleDarkMode');
 const openChatInNewTabButton = document.getElementById('openChatInNewTab');
 const refreshPageButton = document.getElementById('refreshPage');
@@ -24,9 +25,10 @@ const toggleSidebar = () => {
 menuIcon.addEventListener('click', toggleSidebar);
 menuButton.addEventListener('click', toggleSidebar); // Add toggle function for mobile menu button
 closeSidebarButton.addEventListener('click', () => {
-    sidebar.classList.remove('active');
-    document.querySelector('.chat-box').style.left = '20%'; // Reset position
+    sidebar.classList.remove('active'); // Close the sidebar
 });
+
+// Other event listeners remain unchanged...
 
 // Toggle between dark and light mode
 toggleDarkModeButton.addEventListener('click', () => {

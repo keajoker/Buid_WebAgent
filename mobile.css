@@ -40,7 +40,7 @@ body.light-mode {
     border-radius: 12px;
     transition: transform 0.3s ease;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    position: fixed; /* Fixed position for pop-up effect */
+    position: fixed;
     top: 0;
     left: 0;
     height: 100%;
@@ -58,6 +58,47 @@ body.light-mode .sidebar {
     transform: translateX(0); /* Slide sidebar in */
 }
 
+/* Close Sidebar Button */
+#closeSidebarButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 30px;
+    color: #fff;
+    cursor: pointer;
+    z-index: 1001; /* Ensure it’s on top */
+}
+
+body.light-mode #closeSidebarButton {
+    color: #333;
+}
+
+/* Menu */
+.menu {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 50px; /* Add space above the menu items */
+    width: 100%;
+}
+
+.menu li {
+    margin-bottom: 10px;
+    padding: 15px;
+    background-color: #1f4068;
+    border-radius: 6px;
+    font-weight: 500;
+    text-align: center;
+    cursor: pointer;
+}
+
+body.light-mode .menu li {
+    background-color: #ddd;
+    color: #333;
+}
+
+
 /* Menu Button */
 .menu-button {
     display: block;
@@ -67,8 +108,8 @@ body.light-mode .sidebar {
     border: none;
     border-radius: 5px;
     position: fixed;
-    top: 25px;
-    right: 25px;
+    top: 32.1px;
+    right: 32.1px;
     z-index: 1000;
     cursor: pointer;
 }
@@ -121,6 +162,10 @@ body.light-mode .sidebar {
 body.light-mode .menu li {
     background-color: #ddd;
     color: #333;
+}
+.menu li:hover {
+    background-color: #e43f5a;
+    color: #fff;
 }
 
 /* Dark Mode/Light Mode Button */
@@ -176,8 +221,9 @@ body.light-mode .main-content {
 /* Top Section */
 .top-section {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    align-items: center; /* Center align items vertically */
+    justify-content: flex-start; /* Align items to the left */
     background-color: #1f4068;
     padding: 15px;
     border-radius: 8px;
@@ -189,11 +235,16 @@ body.light-mode .top-section {
     background-color: #ddd;
 }
 
+.top-picture {
+    margin-right: 15px; /* Add space between the image and the text */
+}
+
 .top-text {
-    margin-top: 10px;
+    padding-top: 8px;
     font-size: 18px;
     font-weight: 600;
-    text-align: center;
+    text-align: left; /* Align text to the left */
+    color: #e0e0e0; /* Ensure text color is set */
 }
 
 body.light-mode .top-text {
@@ -201,8 +252,8 @@ body.light-mode .top-text {
 }
 
 .circular-image {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     object-fit: cover;
     transition: transform 0.3s ease;
@@ -211,6 +262,7 @@ body.light-mode .top-text {
 .circular-image:hover {
     transform: scale(1.2);
 }
+
 
 /* Chat Section */
 .chat-box {
@@ -423,6 +475,7 @@ body.light-mode #readAloudButton {
 /* Additional Media Query for Very Small Screens */
 @media (max-width: 480px) {
     .sidebar {
+        padding-top: 25px;
         padding: 15px;
     }
 
@@ -454,22 +507,4 @@ body.light-mode #readAloudButton {
         padding: 5px;
         font-size: 12px;
     }
-}
-
-/* Close Sidebar Button */
-.closesidebarbutton {
-    background: transparent;
-    border: none;
-    font-size: 30px;
-    color: #fff;
-    cursor: pointer;
-    position: unset;
-    align-items: self-end;
-    top: 10px;
-    right: 10px;
-    z-index: 1001; /* Ensure it’s on top */
-}
-
-body.light-mode .closesidebarbutton {
-    color: #333;
 }
