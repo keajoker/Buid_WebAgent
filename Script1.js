@@ -2,7 +2,7 @@
 const menuButton = document.getElementById('menuButton');
 const menuIcon = document.getElementById('menuIcon');
 const sidebar = document.getElementById('sidebar');
-const closeSidebarButton = document.getElementById('closeSidebarButton'); // Added close button reference
+const closeSidebarButton = document.getElementById('closeSidebarButton');
 const toggleDarkModeButton = document.getElementById('toggleDarkMode');
 const openChatInNewTabButton = document.getElementById('openChatInNewTab');
 const refreshPageButton = document.getElementById('refreshPage');
@@ -10,10 +10,25 @@ const chatInput = document.getElementById('chatInput');
 const chatMessages = document.getElementById('chatMessages');
 const voiceButton = document.querySelector('.voice-button');
 const voiceButtonImage = voiceButton.querySelector('img');
-const readAloudButton = document.getElementById('readAloudButton'); // New button for reading aloud
-const readAloudButtonImage = readAloudButton.querySelector('img'); // Read Aloud Button Image
+const readAloudButton = document.getElementById('readAloudButton');
+const readAloudButtonImage = readAloudButton.querySelector('img');
 let isDarkMode = true;
 let isReading = false; // Flag to track reading state
+
+// Function to check viewport width and hide the close button on desktop
+const checkViewportWidth = () => {
+    if (window.innerWidth >= 769) {
+        closeSidebarButton.style.display = 'none';
+    } else {
+        closeSidebarButton.style.display = 'block';
+    }
+};
+
+// Initial check
+checkViewportWidth();
+
+// Add an event listener to handle window resizing
+window.addEventListener('resize', checkViewportWidth);
 
 // Toggle sidebar visibility
 const toggleSidebar = () => {
@@ -73,8 +88,8 @@ const sendMessage = async () => {
     chatMessages.appendChild(userMessageElement);
     chatInput.value = '';
 
-    // Send user message to server and get response, every time the servers reset you shpuld change the link to the link they generated for you
-    const response = await fetch('https://0468-2001-8f8-1d5b-5409-d9e8-e8c2-5791-6978.ngrok-free.app/', { 
+    // Send user message to server and get response
+    const response = await fetch('https://0468-2001-8f8-1d5b-5409-d9e8-e8c2-5791-6978.ngrok-free.app/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -177,5 +192,3 @@ readAloudButton.addEventListener('click', () => {
         }
     }
 });
-
-
