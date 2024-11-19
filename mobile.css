@@ -61,8 +61,8 @@ body.light-mode .sidebar {
 /* Close Sidebar Button */
 #closeSidebarButton {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 25px;
+    right: 25px;
     background: transparent;
     border: none;
     font-size: 30px;
@@ -104,14 +104,17 @@ body.light-mode .menu li {
     display: block;
     width: 40px;
     height: 40px;
-    background-color: #162447; /* Button color */
+    background-color: #ffffff00; /* Button color */
     border: none;
     border-radius: 5px;
-    position: fixed;
-    top: 32.1px;
-    right: 32.1px;
+    position: absolute;
+    top: 48px;
+    right: 48px;
     z-index: 1000;
     cursor: pointer;
+    font-size:28px;
+    color:white;
+    padding-bottom: 1.75px;
 }
 
 .menu-button:focus {
@@ -139,6 +142,10 @@ body.light-mode .menu li {
     transform: rotate(-45deg) translate(5px, -5px);
 }
 
+body.light-mode .menu-button{
+    background-color: #ffffff00;
+    color: #333;
+}
 /* Menu Styles */
 .menu-icon {
     display: none;
@@ -227,7 +234,9 @@ body.light-mode .main-content {
     background-color: #1f4068;
     padding: 15px;
     border-radius: 8px;
-    margin-bottom: 15px;
+    margin-top: 15px;
+    margin-left: 15px;
+    margin-right: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
@@ -319,7 +328,7 @@ body.light-mode .chat-input {
 body.light-mode .send-button,
 body.light-mode .voice-button,
 body.light-mode #readAloudButton {
-    background-color: #00000074;
+    background-color: #8f8f8f74;
     color: #fff;
 }
 
@@ -392,7 +401,7 @@ body.light-mode .bot-message {
 }
 
 body.light-mode #readAloudButton {
-    background-color: #00000074;
+    background-color: #8f8f8f74;
     color: #fff;
 }
 
@@ -473,7 +482,7 @@ body.light-mode #readAloudButton {
 }
 
 /* Additional Media Query for Very Small Screens */
-@media (max-width: 480px) {
+@media (max-width: 768px) {
     .sidebar {
         padding-top: 25px;
         padding: 15px;
