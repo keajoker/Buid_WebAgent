@@ -163,9 +163,6 @@ body.light-mode .top-section {
     background-color: #ddd;
 }
 
-
-
-
 .top-text {
     margin-left: 20px;
     font-size: 22px;
@@ -176,6 +173,7 @@ body.light-mode .top-text {
     color: #333;
 }
 
+/* Circular Image */
 .circular-image {
     width: 70px; /* Adjust the size as needed */
     height: 70px; /* Adjust the size as needed */
@@ -187,9 +185,6 @@ body.light-mode .top-text {
 .circular-image:hover {
     transform: scale(1.2); /* Increase size by 20% on hover */
 }
-
-
-
 
 /* Chat Section */
 .chat-box {
@@ -231,45 +226,30 @@ body.light-mode .chat-input {
     margin-right: 10px; /* Added margin */
 }
 
-.send-button {
+.send-button,
+.voice-button,
+#readAloudButton {
     background-color: #0f3460;
     color: #fff;
-    padding: 0 15px;
+    padding: 0 12px; /* Unified padding for all buttons */
     border: none;
     cursor: pointer;
-    border-radius: 8px;
+    border-radius: 8px; /* Consistent border radius */
     transition: transform 0.2s ease;
-    height: 100%;
-}
-
-body.light-mode .send-button {
-    background-color: #00000074;
-    color: #fff;
-}
-
-.send-button:hover {
-    transform: scale(1.05);
-}
-
-/* Voice Button */
-.voice-button {
-    background-color: #0f3460;
-    color: #fff;
-    padding: 0 12px; /* Increase size */
-    border: none;
-    cursor: pointer;
-    border-radius: 8px 8px 8px 8px; /* Square button */
-    transition: transform 0.2s ease;
-    margin-left: 10px;
     height: 100%; /* Match height of the input */
+    margin-left: 10px; /* Added margin to each button */
 }
 
-body.light-mode .voice-button {
+body.light-mode .send-button,
+body.light-mode .voice-button,
+body.light-mode #readAloudButton {
     background-color: #00000074;
     color: #fff;
 }
 
-.voice-button:hover {
+.send-button:hover,
+.voice-button:hover,
+#readAloudButton:hover {
     transform: scale(1.05);
 }
 
@@ -308,6 +288,7 @@ body.light-mode .bot-message {
     background-color: #ddd;
     color: #333;
 }
+
 /* Style for links within bot messages */
 .bot-message a {
     color: #e43f5a; /* Custom link color */
@@ -320,19 +301,11 @@ body.light-mode .bot-message {
 
 /* Add your existing styles here */
 
+/* Unified button style */
 #readAloudButton {
-    background-color: #0f3460;
-    color: white;
-    border: none;
-    padding: 11.75px 16px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 13px;
-    margin: 4px 2px;
-    margin-left: 10px;
-    cursor: pointer;
-    border-radius: 8px;
+    padding: 0 12px; /* Unified padding */
+    height: 100%; /* Match height of the input */
+    margin-left: 10px; /* Added margin */
 }
 
 /* Light mode style for readAloudButton */
@@ -347,3 +320,16 @@ body.light-mode #readAloudButton {
 }
 
 
+/* Menu Button */
+.menu-button {
+    display: block;
+    width: 40px;
+    height: 40px;
+    background-color: #1f4068; /* Button color */
+    border: none;
+    border-radius: 5px;
+    position: fixed;
+    top: -100px;
+    left: -100px;
+    z-index: 1000;
+    cursor: pointer;

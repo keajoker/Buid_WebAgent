@@ -58,11 +58,49 @@ body.light-mode .sidebar {
     transform: translateX(0); /* Slide sidebar in */
 }
 
+/* Menu Button */
+.menu-button {
+    display: block;
+    width: 40px;
+    height: 40px;
+    background-color: #162447; /* Button color */
+    border: none;
+    border-radius: 5px;
+    position: fixed;
+    top: 25px;
+    right: 25px;
+    z-index: 1000;
+    cursor: pointer;
+}
+
+.menu-button:focus {
+    outline: none;
+}
+
+.menu-button .bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    background-color: #fff; /* Bar color */
+    transition: all 0.3s;
+}
+
+.menu-button.active .bar:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.menu-button.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-button.active .bar:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
 /* Menu Styles */
 .menu-icon {
-    font-size: 28px;
-    margin-bottom: 15px;
-    cursor: pointer;
+    display: none;
 }
 
 .menu {
@@ -78,7 +116,6 @@ body.light-mode .sidebar {
     font-weight: 500;
     text-align: center;
     cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
 body.light-mode .menu li {
@@ -96,17 +133,12 @@ body.light-mode .menu li {
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
+/* Dark Mode/Light Mode Button */
 body.light-mode .toggle-dark-mode {
     background-color: #ddd;
     color: #333;
-}
-
-.toggle-dark-mode:hover {
-    background-color: #e43f5a;
-    color: #fff;
 }
 
 /* New ChatBot Button */
@@ -209,15 +241,12 @@ body.light-mode .chat-box {
     border: none;
     border-radius: 8px;
     outline: none;
-    border-right: 0.5px solid #162447;
-    margin-right: 8px;
 }
 
 body.light-mode .chat-input {
     background-color: #fff;
     color: #333;
     border-right: 1px solid #ccc;
-    margin-right: 8px;
 }
 
 .send-button,
@@ -232,6 +261,7 @@ body.light-mode .chat-input {
     transition: transform 0.2s ease;
     margin-left: 5px;
     height: 100%;
+    flex-shrink: 0;
 }
 
 body.light-mode .send-button,
@@ -244,7 +274,7 @@ body.light-mode #readAloudButton {
 .send-button:hover,
 .voice-button:hover,
 #readAloudButton:hover {
-    transform: scale(1.05);
+    transform: scale(1.02);
 }
 
 /* Chat Messages */
@@ -307,8 +337,6 @@ body.light-mode .bot-message {
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 8px;
-    width: 100%;
-    margin-bottom: 10px;
 }
 
 body.light-mode #readAloudButton {
@@ -368,26 +396,21 @@ body.light-mode #readAloudButton {
     }
 
     .chat-box {
-        flex-direction: column;
+        flex-direction: row; /* Ensure buttons are next to the input */
+        align-items: center;
         padding: 10px;
     }
 
     .chat-input {
-        width: 100%;
-        margin-bottom: 10px;
+        width: calc(100% - 10px * 3 - 8px * 3 - 36px * 3); /* Adjust width to fit all buttons next to it */
+        margin-bottom: 0; /* Remove bottom margin */
     }
 
-    .send-button, .voice-button {
-        width: 100%;
-        margin-left: 0;
-        margin-bottom: 10px;
-    }
-
+    .send-button,
+    .voice-button,
     #readAloudButton {
-        width: 100%;
-        padding: 10px;
-        margin-left: 0;
-        margin-bottom: 10px;
+        width: 36px; /* Adjust width to fit next to the input */
+        margin-left: 8px; /* Ensure spacing between buttons */
     }
 
     body.light-mode .chat-box {
@@ -421,11 +444,13 @@ body.light-mode #readAloudButton {
     }
 
     .chat-input {
-        padding: 5px;
+        padding: 12px;
         font-size: 12px;
     }
 
-    .send-button, .voice-button, #readAloudButton {
+    .send-button,
+    .voice-button,
+    #readAloudButton {
         padding: 5px;
         font-size: 12px;
     }

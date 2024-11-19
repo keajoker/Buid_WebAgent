@@ -1,4 +1,5 @@
 // Get references to HTML elements
+const menuButton = document.getElementById('menuButton');
 const menuIcon = document.getElementById('menuIcon');
 const sidebar = document.getElementById('sidebar');
 const toggleDarkModeButton = document.getElementById('toggleDarkMode');
@@ -9,14 +10,18 @@ const chatMessages = document.getElementById('chatMessages');
 const voiceButton = document.querySelector('.voice-button');
 const voiceButtonImage = voiceButton.querySelector('img');
 const readAloudButton = document.getElementById('readAloudButton'); // New button for reading aloud
+const readAloudButtonImage = readAloudButton.querySelector('img'); // Read Aloud Button Image
 let isDarkMode = true;
 let isReading = false; // Flag to track reading state
 
 // Toggle sidebar visibility
-menuIcon.addEventListener('click', () => {
+const toggleSidebar = () => {
     sidebar.classList.toggle('active');
     document.querySelector('.chat-box').style.left = sidebar.classList.contains('active') ? '60px' : '20%';
-});
+};
+
+menuIcon.addEventListener('click', toggleSidebar);
+menuButton.addEventListener('click', toggleSidebar); // Add toggle function for mobile menu button
 
 // Toggle between dark and light mode
 toggleDarkModeButton.addEventListener('click', () => {
@@ -62,7 +67,7 @@ const sendMessage = async () => {
     chatInput.value = '';
 
     // Send user message to server and get response
-    const response = await fetch(' https://b67e-2001-8f8-1d5b-5409-d9e8-e8c2-5791-6978.ngrok-free.app', {
+    const response = await fetch('https://b67e-2001-8f8-1d5b-5409-d9e8-e8c2-5791-6978.ngrok-free.app', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -146,19 +151,21 @@ if ('webkitSpeechRecognition' in window) {
 readAloudButton.addEventListener('click', () => {
     if (isReading) {
         speechSynthesis.cancel(); // Stop reading
-        readAloudButton.textContent = 'Read Aloud';
+        readAloudButton.innerHTML = '<img src="OIP.png" alt="Read Aloud" width="22.790697674418604651162790697674" height="20">'; // Change to original image
         isReading = false;
     } else {
         const latestBotMessage = chatMessages.querySelector('.bot-message:last-child');
         if (latestBotMessage) {
             const textContent = latestBotMessage.innerText;
             const utterance = new SpeechSynthesisUtterance(textContent);
+            utterance.onstart = () => {
+                readAloudButton.innerHTML = '<img src="OIP 1.png" alt="Stop Reading" width="22.790697674418604651162790697674" height="20">'; // Change to reading image
+            };
             utterance.onend = () => {
                 isReading = false;
-                readAloudButton.textContent = 'Read Aloud';
+                readAloudButton.innerHTML = '<img src="OIP.png" alt="Read Aloud" width="22.790697674418604651162790697674" height="20">'; // Change back to original image
             };
             speechSynthesis.speak(utterance);
-            readAloudButton.textContent = 'Stop Reading';
             isReading = true;
         }
     }
