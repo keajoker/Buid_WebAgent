@@ -30,22 +30,22 @@ body.light-mode {
 
 /* Sidebar */
 .sidebar {
-    width: 100%;
+    width: 240px;
     background-color: #162447;
     color: #fff;
-    padding: 10px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     border-radius: 12px;
     transition: transform 0.3s ease;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    position: fixed;
+    position: fixed; /* Fixed position for pop-up effect */
     top: 0;
     left: 0;
     height: 100%;
     z-index: 10;
-    transform: translateX(-100%);
+    transform: translateX(-100%); /* Hide sidebar initially */
 }
 
 body.light-mode .sidebar {
@@ -53,8 +53,9 @@ body.light-mode .sidebar {
     color: #333;
 }
 
+/* Show Sidebar */
 .sidebar.active {
-    transform: translateX(0);
+    transform: translateX(0); /* Slide sidebar in */
 }
 
 /* Menu Styles */
@@ -117,6 +118,19 @@ body.light-mode .toggle-dark-mode {
     color: #fff;
 }
 
+/* New ChatBot Button */
+body.light-mode #openChatInNewTab, 
+body.light-mode #refreshPage {
+    background-color: #ddd;
+    color: #333;
+}
+
+#openChatInNewTab:hover,
+#refreshPage:hover {
+    background-color: #e43f5a;
+    color: #fff;
+}
+
 /* Main Content */
 .main-content {
     flex: 1;
@@ -128,6 +142,7 @@ body.light-mode .toggle-dark-mode {
     display: flex;
     flex-direction: column;
     position: relative; /* Ensure the main content can be overlapped */
+    padding-top: 70px; /* Make space for the fixed sidebar */
 }
 
 body.light-mode .main-content {
@@ -139,11 +154,11 @@ body.light-mode .main-content {
 .top-section {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     background-color: #1f4068;
-    padding: 10px;
+    padding: 15px;
     border-radius: 8px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
@@ -152,11 +167,10 @@ body.light-mode .top-section {
 }
 
 .top-text {
-    margin-left: 0;
     margin-top: 10px;
     font-size: 18px;
-    text-align: center;
     font-weight: 600;
+    text-align: center;
 }
 
 body.light-mode .top-text {
@@ -164,8 +178,8 @@ body.light-mode .top-text {
 }
 
 .circular-image {
-    width: 50px; /* Adjust the size as needed */
-    height: 50px; /* Adjust the size as needed */
+    width: 60px; /* Adjust the size as needed */
+    height: 60px; /* Adjust the size as needed */
     border-radius: 50%; /* This makes the image circular */
     object-fit: cover; /* Ensures the image covers the entire container */
     transition: transform 0.3s ease; /* Smooth transition for the hover effect */
@@ -177,7 +191,6 @@ body.light-mode .top-text {
 
 /* Chat Section */
 .chat-box {
-    height: 50px;
     display: flex;
     flex-direction: column;
     background-color: #4f6d90;
@@ -196,14 +209,15 @@ body.light-mode .chat-box {
 }
 
 .chat-input {
-    width: 100%;
-    padding: 10px;
+    flex: 1;
+    padding: 8px;
     font-size: 14px;
     background-color: #0f3460;
     color: #e0e0e0;
     border: none;
     border-radius: 8px;
     outline: none;
+    border-right: 0.5px solid #162447;
     margin-bottom: 10px;
 }
 
@@ -211,11 +225,10 @@ body.light-mode .chat-input {
     background-color: #fff;
     color: #333;
     border-right: 1px solid #ccc;
-    margin-right: 8px;
+    margin-bottom: 10px;
 }
 
 .send-button {
-    width: 100%;
     background-color: #0f3460;
     color: #fff;
     padding: 8px;
@@ -223,8 +236,8 @@ body.light-mode .chat-input {
     cursor: pointer;
     border-radius: 8px;
     transition: transform 0.2s ease;
+    width: 100%;
     margin-bottom: 10px;
-    font-size: 14px;
 }
 
 body.light-mode .send-button {
@@ -238,16 +251,15 @@ body.light-mode .send-button {
 
 /* Voice Button */
 .voice-button {
-    width: 100%;
     background-color: #0f3460;
     color: #fff;
     padding: 8px;
     border: none;
     cursor: pointer;
-    border-radius: 8px;
+    border-radius: 8px 8px 8px 8px; /* Square button */
     transition: transform 0.2s ease;
+    width: 100%;
     margin-bottom: 10px;
-    font-size: 14px;
 }
 
 body.light-mode .voice-button {
@@ -307,18 +319,19 @@ body.light-mode .bot-message {
 
 /* Read Aloud Button */
 #readAloudButton {
-    width: 100%;
     background-color: #0f3460;
     color: white;
     border: none;
-    padding: 8px;
+    padding: 10px 12px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 14px;
-    margin: 10px 0;
+    font-size: 12px;
+    margin: 4px 2px;
     cursor: pointer;
     border-radius: 8px;
+    width: 100%;
+    margin-bottom: 10px;
 }
 
 body.light-mode #readAloudButton {
@@ -330,108 +343,113 @@ body.light-mode #readAloudButton {
     transform: scale(1.05);
 }
 
-/* Mobile-Specific Styles */
+/* Media Queries for Mobile Responsiveness */
+@media (max-width: 768px) {
 
-/* General reset (optional, repeated for mobile) */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    .container {
+        flex-direction: column;
+        padding: 10px;
+        gap: 10px;
+    }
+
+    .sidebar {
+        position: fixed;
+        width: 100%;
+        max-width: none;
+        transform: translateX(-100%);
+        padding: 20px;
+        height: 100%;
+        z-index: 1000; /* Ensure sidebar is on top */
+        top: 0;
+        left: 0;
+        transition: transform 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+    }
+
+    .main-content {
+        padding-top: 10px; /* No extra space for fixed sidebar */
+    }
+
+    .top-section {
+        align-items: flex-start;
+        padding: 10px;
+    }
+
+    .top-text {
+        font-size: 16px;
+        margin-top: 10px;
+        text-align: center;
+    }
+
+    .circular-image {
+        width: 50px;
+        height: 50px;
+    }
+
+    .chat-box {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .chat-input {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .send-button, .voice-button {
+        width: 100%;
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+
+    #readAloudButton {
+        width: 100%;
+        padding: 10px;
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+
+    body.light-mode .chat-box {
+        background-color: #f0f0f0;
+        color: #333;
+        border: 1px solid #ccc;
+    }
 }
 
-/* Ensure the container stacks vertically */
-.container {
-    flex-direction: column;
-    padding: 10px;
-    height: auto;
-    gap: 10px;
-}
+/* Additional Media Query for Very Small Screens */
+@media (max-width: 480px) {
+    .sidebar {
+        padding: 15px;
+    }
 
-/* Sidebar adjustments for mobile */
-.sidebar {
-    position: fixed;
-    top: 0;
-    left: -240px;
-    height: 100%;
-    width: 240px;
-    background-color: #162447;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
-    transition: left 0.3s ease;
-    z-index: 1000;
-}
+    .menu li {
+        padding: 10px;
+        font-size: 14px;
+    }
 
-.sidebar.active {
-    left: 0;
-}
+    .main-content {
+        padding: 10px;
+    }
 
-.menu-icon {
-    display: block;
-    position: fixed;
-    top: 15px;
-    left: 15px;
-    font-size: 28px;
-    background-color: #162447;
-    color: white;
-    padding: 10px;
-    border-radius: 50%;
-    cursor: pointer;
-    z-index: 1100;
-}
+    .top-section {
+        padding: 5px;
+    }
 
-/* Adjust menu items for smaller viewports */
-.menu {
-    margin-top: 60px;
-    width: 100%;
-}
+    .chat-box {
+        padding: 5px;
+    }
 
-.menu li {
-    padding: 15px 10px;
-    text-align: center;
-    font-size: 14px;
-}
+    .chat-input {
+        padding: 5px;
+        font-size: 12px;
+    }
 
-/* Main content adjustments */
-.main-content {
-    margin-top: 70px;
-    padding: 20px;
-    font-size: 14px;
-}
-
-/* Top section adjustments */
-.top-section {
-    flex-direction: column;
-    text-align: center;
-    padding: 15px;
-}
-
-.circular-image {
-    margin-bottom: 10px;
-}
-
-.top-text {
-    font-size: 18px;
-    text-align: center;
-}
-
-/* Chat box adjustments */
-.chat-box {
-    flex-direction: column;
-    gap: 10px;
-    padding: 10px;
-}
-
-.chat-input {
-    margin-bottom: 10px;
-    font-size: 14px;
-}
-
-.send-button, .voice-button, #readAloudButton {
-    font-size: 14px;
-    padding: 8px;
-}
-
-/* Chat messages */
-#chatMessages {
-    max-height: 50vh;
-    overflow-y: auto;
+    .send-button, .voice-button, #readAloudButton {
+        padding: 5px;
+        font-size: 12px;
+    }
 }
