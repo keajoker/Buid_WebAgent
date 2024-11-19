@@ -22,19 +22,17 @@ body.light-mode {
 /* Main Container */
 .container {
     display: flex;
-    flex-direction: column;
     height: 100vh;
-    padding: 10px;
-    gap: 10px;
+    padding: 20px;
+    gap: 20px;
 }
 
 /* Sidebar */
 .sidebar {
-    width: 100%;
-    max-width: 240px;
+    width: 240px;
     background-color: #162447;
     color: #fff;
-    padding: 10px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -51,7 +49,7 @@ body.light-mode .sidebar {
 /* Menu Styles */
 .menu-icon {
     font-size: 28px;
-    margin-bottom: 15px;
+    margin-bottom: 30px;
     cursor: pointer;
 }
 
@@ -61,8 +59,9 @@ body.light-mode .sidebar {
 }
 
 .menu li {
-    margin-bottom: 10px;
-    padding: 15px;
+    margin-bottom: 15px;
+    padding-top: 25px;
+    padding-bottom: 25px;
     background-color: #1f4068;
     border-radius: 6px;
     font-weight: 500;
@@ -98,7 +97,7 @@ body.light-mode .menu li:hover {
 
 /* Dark Mode/Light Mode Button */
 .toggle-dark-mode {
-    padding: 10px 15px;
+    padding: 12px 20px;
     font-size: 16px;
     font-weight: bold;
     background-color: #1f4068;
@@ -135,7 +134,7 @@ body.light-mode #refreshPage {
 /* Main Content */
 .main-content {
     flex: 1;
-    padding: 20px;
+    padding: 30px;
     background-color: #0f3460;
     color: #fff;
     border-radius: 12px;
@@ -154,9 +153,9 @@ body.light-mode .main-content {
     display: flex;
     align-items: center;
     background-color: #1f4068;
-    padding: 15px;
+    padding: 20px;
     border-radius: 8px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
@@ -164,9 +163,12 @@ body.light-mode .top-section {
     background-color: #ddd;
 }
 
+
+
+
 .top-text {
-    margin-left: 15px;
-    font-size: 20px;
+    margin-left: 20px;
+    font-size: 22px;
     font-weight: 600;
 }
 
@@ -175,8 +177,8 @@ body.light-mode .top-text {
 }
 
 .circular-image {
-    width: 60px; /* Adjust the size as needed */
-    height: 60px; /* Adjust the size as needed */
+    width: 70px; /* Adjust the size as needed */
+    height: 70px; /* Adjust the size as needed */
     border-radius: 50%; /* This makes the image circular */
     object-fit: cover; /* Ensures the image covers the entire container */
     transition: transform 0.3s ease; /* Smooth transition for the hover effect */
@@ -185,6 +187,9 @@ body.light-mode .top-text {
 .circular-image:hover {
     transform: scale(1.2); /* Increase size by 20% on hover */
 }
+
+
+
 
 /* Chat Section */
 .chat-box {
@@ -208,28 +213,28 @@ body.light-mode .chat-box {
 
 .chat-input {
     flex: 1;
-    padding: 8px;
-    font-size: 14px;
+    padding: 10px;
+    font-size: 16px;
     background-color: #0f3460;
     color: #e0e0e0;
     border: none;
     border-radius: 8px;
     outline: none;
     border-right: 0.5px solid #162447;
-    margin-right: 8px;
+    margin-right: 10px; /* Added margin */
 }
 
 body.light-mode .chat-input {
     background-color: #fff;
     color: #333;
     border-right: 1px solid #ccc;
-    margin-right: 8px;
+    margin-right: 10px; /* Added margin */
 }
 
 .send-button {
     background-color: #0f3460;
     color: #fff;
-    padding: 0 10px;
+    padding: 0 15px;
     border: none;
     cursor: pointer;
     border-radius: 8px;
@@ -250,13 +255,13 @@ body.light-mode .send-button {
 .voice-button {
     background-color: #0f3460;
     color: #fff;
-    padding: 0 10px; 
+    padding: 0 12px; /* Increase size */
     border: none;
     cursor: pointer;
-    border-radius: 8px 8px 8px 8px; 
+    border-radius: 8px 8px 8px 8px; /* Square button */
     transition: transform 0.2s ease;
-    margin-left: 8px;
-    height: 100%; 
+    margin-left: 10px;
+    height: 100%; /* Match height of the input */
 }
 
 body.light-mode .voice-button {
@@ -279,7 +284,7 @@ body.light-mode .voice-button {
 .user-message, .bot-message {
     padding: 10px;
     border-radius: 8px;
-    margin: 8px 0;
+    margin: 10px 0;
 }
 
 .user-message {
@@ -303,140 +308,42 @@ body.light-mode .bot-message {
     background-color: #ddd;
     color: #333;
 }
-
 /* Style for links within bot messages */
 .bot-message a {
-    color: #e43f5a;
-    text-decoration: none;
+    color: #e43f5a; /* Custom link color */
+    text-decoration: none; /* Optional: Remove underline */
 }
 
 .bot-message a:hover {
-    text-decoration: underline;
+    text-decoration: underline; /* Optional: Add underline on hover */
 }
 
-/* Read Aloud Button */
+/* Add your existing styles here */
+
 #readAloudButton {
     background-color: #0f3460;
     color: white;
     border: none;
-    padding: 10px 12px;
+    padding: 11.75px 16px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 12px;
+    font-size: 13px;
     margin: 4px 2px;
+    margin-left: 10px;
     cursor: pointer;
     border-radius: 8px;
 }
 
+/* Light mode style for readAloudButton */
 body.light-mode #readAloudButton {
     background-color: #00000074;
     color: #fff;
 }
 
+/* Hover effect for readAloudButton */
 #readAloudButton:hover {
     transform: scale(1.05);
 }
 
-/* Media Queries for Mobile Responsiveness */
-@media (max-width: 768px) {
-    .container {
-        flex-direction: column;
-        padding: 10px;
-        gap: 10px;
-    }
 
-    .sidebar {
-        width: 100%;
-        margin-bottom: 10px;
-    }
-
-    .main-content {
-        flex: 1;
-        padding: 15px;
-    }
-
-    .top-section {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 10px;
-    }
-
-    .top-text {
-        margin-left: 0;
-        margin-top: 10px;
-        font-size: 18px;
-        text-align: center;
-    }
-
-    .circular-image {
-        width: 50px;
-        height: 50px;
-    }
-
-    .chat-box {
-        flex-direction: column;
-        padding: 10px;
-    }
-
-    .chat-input {
-        width: 100%;
-        margin-bottom: 10px;
-    }
-
-    .send-button,
-    .voice-button {
-        width: 100%;
-        margin-left: 0;
-        margin-bottom: 10px;
-    }
-}
-
-/* Additional Media Query for Very Small Screens */
-@media (max-width: 480px) {
-    .top-text {
-        font-size: 16px;
-    }
-
-    .circular-image {
-        width: 45px;
-        height: 45px;
-    }
-
-    .sidebar {
-        padding: 5px;
-    }
-
-    .menu li {
-        padding: 10px;
-        font-size: 14px;
-    }
-
-    .main-content {
-        padding: 10px;
-    }
-
-    .top-section {
-        padding: 5px;
-    }
-
-    .chat-box {
-        padding: 5px;
-    }
-
-    .chat-input {
-        padding: 5px;
-        font-size: 12px;
-    }
-
-    .send-button,
-    .voice-button {
-        padding: 5px;
-        font-size: 12px;
-    }
-
-    #readAloudButton {
-        padding: 5px;
-        font-size: 10px;
-    }
-}
