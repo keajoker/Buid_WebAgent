@@ -73,8 +73,8 @@ const sendMessage = async () => {
     chatMessages.appendChild(userMessageElement);
     chatInput.value = '';
 
-    // Send user message to server and get response
-    const response = await fetch('https://0468-2001-8f8-1d5b-5409-d9e8-e8c2-5791-6978.ngrok-free.app/', {
+    // Send user message to server and get response, every time the servers reset you shpuld change the link to the link they generated for you
+    const response = await fetch('https://0468-2001-8f8-1d5b-5409-d9e8-e8c2-5791-6978.ngrok-free.app/', { 
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
