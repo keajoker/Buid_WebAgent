@@ -455,3 +455,21 @@ body.light-mode #readAloudButton {
         font-size: 12px;
     }
 }
+
+/* Close Sidebar Button */
+.closesidebarbutton {
+    background: transparent;
+    border: none;
+    font-size: 30px;
+    color: #fff;
+    cursor: pointer;
+    position: unset;
+    align-items: self-end;
+    top: 10px;
+    right: 10px;
+    z-index: 1001; /* Ensure it’s on top */
+}
+
+body.light-mode .closesidebarbutton {
+    color: #333;
+}

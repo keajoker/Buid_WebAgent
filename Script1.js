@@ -20,8 +20,13 @@ const toggleSidebar = () => {
     document.querySelector('.chat-box').style.left = sidebar.classList.contains('active') ? '60px' : '20%';
 };
 
+// Event listeners for opening and closing the sidebar
 menuIcon.addEventListener('click', toggleSidebar);
 menuButton.addEventListener('click', toggleSidebar); // Add toggle function for mobile menu button
+closeSidebarButton.addEventListener('click', () => {
+    sidebar.classList.remove('active');
+    document.querySelector('.chat-box').style.left = '20%'; // Reset position
+});
 
 // Toggle between dark and light mode
 toggleDarkModeButton.addEventListener('click', () => {
@@ -97,7 +102,7 @@ document.querySelectorAll('.menu li').forEach(item => {
         const link = item.getAttribute('data-link');
         if (link) {
             window.open(link, '_blank'); // Open link in a new tab
-        }
+                    }
     });
 });
 
@@ -170,3 +175,5 @@ readAloudButton.addEventListener('click', () => {
         }
     }
 });
+
+
