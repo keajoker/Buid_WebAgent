@@ -74,7 +74,7 @@ const sendMessage = async () => {
     chatInput.value = '';
 
     // Send user message to server and get response
-    const response = await fetch('https://491c-2001-8f8-1d5b-5409-d9e8-e8c2-5791-6978.ngrok-fre/', {
+    const response = await fetch('https://1283-2001-8f8-1d5b-5409-d9e8-e8c2-5791-6978.ngrok-free.app', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
