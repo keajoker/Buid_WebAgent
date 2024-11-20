@@ -86,7 +86,7 @@ const sendMessage = async () => {
     userMessageElement.className = 'user-message';
     userMessageElement.textContent = userMessage;
     chatMessages.appendChild(userMessageElement);
-    chatInput.value = '';
+    chatInput.value = "";
 
     // Send user message to server and get response
     const response = await fetch('https://bfe0-5-194-186-60.ngrok-free.app/', {
